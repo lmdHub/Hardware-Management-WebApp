@@ -10,6 +10,8 @@ import OrderRouter from "./Route/oder.routes.js";
 import subscriptionsRouter from "./Route/subscription.route.js";
 import userRouter from "./Route/user.routes.js";
 
+import connectDB from "./database/mongodb.js";
+
 
 const app = express();
 
@@ -28,8 +30,9 @@ app.get('/', (req,res) => {
     res.send('Welcome to Hardware management System');
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server running at http://localhost:${PORT}/`);
+    await connectDB();
 });
 
 export default app;
