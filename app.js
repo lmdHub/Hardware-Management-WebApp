@@ -1,0 +1,35 @@
+console.log('server running - Hello worl');
+
+import express from "express";
+
+import { PORT } from "./Config/env.js";
+
+import authRouter from "./Route/auth.routes.js";
+import InventoryRouter from "./Route/inventory.routes.js";
+import OrderRouter from "./Route/oder.routes.js";
+import subscriptionsRouter from "./Route/subscription.route.js";
+import userRouter from "./Route/user.routes.js";
+
+
+const app = express();
+
+// Middleware to parse JSON bodies
+
+app.use('/api/v1/auth', authRouter); // get to signup page by hitting /api/v1/auth/signup
+app.use('/api/v1/users', userRouter); // get to users page by hitting /api/v1/users
+app.use('/api/v1/inventories', InventoryRouter); // get to inventory page by hitting /api/v1/inventory
+app.use('/api/v1/orders', OrderRouter); // get to orders page by hitting /api/v1/orders
+app.use('/api/v1/subscriptions', subscriptionsRouter); // get to subscriptions page by hitting /api/v1/subscriptions
+
+
+
+
+app.get('/', (req,res) => {
+    res.send('Welcome to Hardware management System');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
+});
+
+export default app;
